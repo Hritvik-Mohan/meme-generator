@@ -1,13 +1,18 @@
+import React,{ useState } from "react";
 import memesData from "../memesData"
 
 export default function Meme() {
+
+    const [memeImage, setMemeImage] = React.useState("")
+
+
     let url;
     function handleBtnClicked() {
         let memesArr = memesData.data.memes;
         let length = memesArr.length;
         var meme = memesArr[Math.floor(Math.random()*length)];
-        url = meme.url
-        console.log(url)
+        setMemeImage(meme.url)
+        
     }
     return (
         <main>
@@ -31,6 +36,7 @@ export default function Meme() {
                 >
                     Get a new meme image 🖼
                 </button>
+                <img src={memeImage} alt="" />
             </div>
         </main>
     )

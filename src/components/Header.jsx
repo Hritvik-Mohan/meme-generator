@@ -14,7 +14,7 @@ export default function Header() {
                     </div>
                     <h2 className="header--title">Meme Generator</h2>
                 </div>
-                <h4 className="header--project">React Component - Project 3</h4>
+                <a href="https://github.com/Hritvik-Mohan/meme-generator" className="header--project" target="_blank"><i class="bi bi-github"></i></a>
             </div>
         </header>
     )

@@ -1,6 +1,28 @@
-import React,{ useState } from "react";
+import React,{ useState, useCallback, useRef } from "react";
+import { toPng } from 'html-to-image'
 
 export default function Meme() {
+
+    const ref = useRef(null)
+
+    const onButtonClick = useCallback(() => {
+    //   if (ref.current === null) {
+    //     return
+    //   }
+  
+      toPng(ref.current, { cacheBust: true, })
+        .then((dataUrl) => {
+          const link = document.createElement('a')
+          link.download = 'meme.png'
+          link.href = dataUrl
+          link.click()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }, [ref])
+
+/////////////////////////////////////////////////////////
 
     const [meme, setMeme] = React.useState({
         topText: "",
@@ -15,7 +37,7 @@ export default function Meme() {
             .then(data => setAllMemes(data.data.memes))
     }, [])
 
-    console.log(allMemes)
+    // console.log(allMemes)
 
     // const [memeImage, setMemeImage] = React.useState("https://i.imgflip.com/23ls.jpg")
 
@@ -24,7 +46,7 @@ export default function Meme() {
         // let memesArray = allMemes.data.memes;
         var randomNumber = Math.floor(Math.random()*allMemes.length);
         const url = allMemes[randomNumber].url;
-        console.log(url)
+        // console.log(url)
         setMeme(prevMeme => ({
             ...prevMeme,
             randomImage: url
@@ -80,11 +102,15 @@ export default function Meme() {
                 >
                     Get a new meme image 🖼
                 </button>
-                <div className="meme">
+
+                <div className="meme" ref={ref}>
                     <img className="meme--image" src={meme.randomImage} alt="" />
                     <h2 className="meme--text top">{meme.topText}</h2>
                     <h2 className="meme--text bottom">{meme.bottomText}</h2>
                 </div>
+
+                <button className="form--button download--button" onClick={onButtonClick}>Download</button>
+
             </div>
         </main>
     )

@@ -9,6 +9,7 @@
 :root {
   --accent-color: #d1215c;
   --white: #FFFFFF;
+  --download: #ab2a55;
 }
 
 body {
@@ -125,6 +126,10 @@ main {
   cursor: pointer;
 }
 
+.download--button {
+  background: var(--download);
+}
+
 /* .meme-img {
   
 } */
@@ -139,7 +144,7 @@ main {
   width: 100%;
   border-radius: 3px;
   border-radius: 5px;
-  border: 1px solid #D5D4D8;
+  /* border: 1px solid #D5D4D8; */
 }
 
 .meme--text {
